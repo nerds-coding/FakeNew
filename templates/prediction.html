@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!--- Google Chart API -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+
+    <title>News Verification </title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--- Title Donut Chart -->
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                {% for key, value in titlePolarity.items() %}
+        {% if value is string %}
+        ['{{ key }}', '{{ value }}'],
+            {% else %}
+        ['{{ key }}', {{ value }}],
+            {% endif %}
+        {% endfor %}
+            ]);
+
+        var options = {
+            title: 'Title Sentiment Polarity',
+            pieHole: 0.4,
+            is3D: true,
+            pieStartAngle: 100,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('titlePolarity'));
+
+        chart.draw(data, options);
+        }
+    </script>
+
+    <!--- Article Donut Chart -->
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                {% for key, value in articlePolarity.items() %}
+        {% if value is string %}
+        ['{{ key }}', '{{ value }}'],
+            {% else %}
+        ['{{ key }}', {{ value }}],
+            {% endif %}
+        {% endfor %}
+                ]);
+
+        var options = {
+            title: 'Article Sentiment Polarity',
+            pieHole: 0.4,
+            is3D: true,
+            pieStartAngle: 100,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('articlePolarity'));
+
+        chart.draw(data, options);
+            }
+    </script>
+
+</head>
+
+<body background="{{ url_for('static', filename='images/bgimage.jpg') }}">
+    <!-------------justify Center--------------------------->
+    <div class="content">
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-------------------------Card Section Starts Here----------------------->
+                    <div class="card shadow-lg w-100" style="border: 0px solid black">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div id="titlePolarity" class="col-6" style=" height: 700px;" ></div>
+                                <div id="articlePolarity" class="col-6" style=" height: 700px;"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <center>
+                                        <p class="h4">Logistic</p>
+                                        <img src="{{output[0]}}" alt="...." class="col-8">
+                                        
+                                    </center>
+                                </div>
+
+                                <div class="col-6">
+                                    <center>
+                                        <p class="h4">Multinomial</p>
+                                        <img src="{{output[1]}}" alt="...." class="col-8">
+                                        
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

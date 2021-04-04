@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+
+  <title>News Verification </title>
+</head>
+
+<body background="{{ url_for('static', filename='images/bgimage.jpg') }}">
+
+  <!-------------justify Center--------------------------->
+  <div class="content">
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+
+
+          <!-------------------------Card Section Starts Here----------------------->
+          <div class="card shadow-lg" style="opacity: 0.95; border: 0px solid black">
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+
+                  <h3 class="heading mb-4">Fake News Prediction</h3>
+                  <p></p>
+                  <!---------------On hold Tag--------------------------------->
+
+                  <p><img src="{{url_for('static',filename ='images/image.jpg')}}" alt="Image" class="img-fluid"></p>
+
+
+                </div>
+                <div class="col-md-6">
+
+                  <form class="mb-5" method="post" id="contactForm" name="contactForm" method="POST" action="{{url_for('verify')}}">
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="title" id="title" cols="30" rows="2"
+                          placeholder="Enter Title" required></textarea>
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="article" id="message" cols="30" rows="11"
+                          placeholder="Enter Article" required></textarea>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <input type="submit" value="Verify"
+                          class="btn btn-primary btn-lg btn-block rounded-0 py-2 px-6">
+                        <span class="submitting"></span>
+                      </div>
+                    </div>
+                  </form>
+
+                  <div id="form-message-warning mt-4"></div>
+                  <div id="form-message-success">
+                    Your message was sent, thank you!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <script src="{{url_for('static',filename ='js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{url_for('static',filename ='js/popper.min.js')}}"></script>
+  <script src="{{url_for('static',filename ='js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static',filename ='js/main.js')}}"></script>
+
+</body>
+
+</html>
