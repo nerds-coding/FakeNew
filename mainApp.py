@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, make_response, render_template
 import joblib
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import os
+import json
 
 app = Flask(__name__)
 
@@ -90,7 +91,10 @@ def jsonFile():
 
         if(req != None):
             response = {
-                "prediction": " "+RealOrFake(title, article)
+                "logisticRegression":str(RealOrFake(title,article)[0]),
+                "multinomial": str(RealOrFake(title, article)[1]),
+                "article": json.dumps(PolarityCount(title,article)[1]),
+                "title": json.dumps(PolarityCount(title, article)[0])
             }
             return make_response(jsonify(response), 200)
         else:
